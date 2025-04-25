@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Order</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Your Order Summary</h1>
+        
+        {{if .Items}}
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Unit Price (₹)</th>
+                    <th>Total (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .Items}}
+                <tr>
+                    <td>{{.Name}}</td>
+                    <td>{{.Quantity}}</td>
+                    <td>{{printf "%.2f" .Price}}</td>
+                    <td>{{printf "%.2f" .Total}}</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+        
+        <div class="order-summary">
+            <p><strong>Subtotal:</strong> ₹{{printf "%.2f" .Subtotal}}</p>
+            <p><strong>GST (5%):</strong> ₹{{printf "%.2f" .GST}}</p>
+            <p class="total"><strong>Total:</strong> ₹{{printf "%.2f" .Total}}</p>
+        </div>
+        
+        <div class="order-actions">
+            <a href="/bill" class="btn btn-primary">Confirm Order</a>
+            <a href="/menu" class="btn">Modify Order</a>
+        </div>
+        {{else}}
+        <div class="empty-order">
+            <p>No items in your order yet.</p>
+            <a href="/menu" class="btn btn-primary">Back to Menu</a>
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>

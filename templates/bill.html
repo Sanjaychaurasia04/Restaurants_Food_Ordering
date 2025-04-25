@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bill</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Final Bill</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price (₹)</th>
+                    <th>Total (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .Items}}
+                <tr>
+                    <td>{{.Name}}</td>
+                    <td>{{.Quantity}}</td>
+                    <td>{{printf "%.2f" .Price}}</td>
+                    <td>{{printf "%.2f" .Total}}</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+        
+        <div class="bill-summary">
+            <p><strong>Subtotal:</strong> ₹{{printf "%.2f" .Subtotal}}</p>
+            <p><strong>GST (5%):</strong> ₹{{printf "%.2f" .GST}}</p>
+            <p class="total"><strong>Total Amount:</strong> ₹{{printf "%.2f" .Total}}</p>
+        </div>
+        
+        <div class="center">
+            <a href="/" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

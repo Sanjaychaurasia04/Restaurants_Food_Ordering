@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Our Menu</h1>
+        <form action="/order" method="POST">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price (₹)</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .}}
+                    <tr>
+                        <td>{{.Name}}</td>
+                        <td>{{printf "%.2f" .Price}}</td>
+                        <td>
+                            <input type="number" name="item_{{.ID}}" min="0" value="0" class="qty-input">
+                        </td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Update Order</button>
+                <a href="/view-order" class="btn" target="_blank">View My Order</a>
+                <a href="/" class="btn">Back to Home</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
